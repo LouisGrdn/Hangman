@@ -12,7 +12,7 @@ struct Hangman: View {
         GeometryReader { geometry in
             Path { path in
                 var width = min(geometry.size.width, geometry.size.height)
-                let height = width
+                let height = width * 0.9
                 let xOffset = (width * 0.2) / 2.0
                 width *= 0.8
                 path.move(to: CGPoint(x: width, y: height))
