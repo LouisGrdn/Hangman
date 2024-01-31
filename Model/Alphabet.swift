@@ -7,23 +7,36 @@
 
 import Foundation
 
-var allLetters = ["A", "B", "C", "D", "E", "F",
+var alphabet = ["A", "B", "C", "D", "E", "F",
                   "G", "H", "I", "J", "K", "L",
                   "M", "N", "O", "P", "Q", "R",
                   "S", "T", "U", "V", "W", "X",
                   "Y", "Z"]
 
 @Observable
-class Alphabet {
-    var letters: Array = createAllLetters(letters: allLetters)
+class Game {
+    init(word: String) {
+        //Word to guess
+        self.word = word
+        // Letters in the word
+        self.letters = []
+        // All letters to show
+        self.allLetters = []
+        for char in word {
+            let c = char.uppercased()
+            if(!self.letters.contains(c)){
+                letters.append(c)
+            }
+        }
+        for i in alphabet.indices {
+            self.allLetters.append(Letter(id: i+1, value: alphabet[i], isInWord: self.letters.contains(alphabet[i])))
+        }
+    }
+    
+    var allLetters: Array<Letter>
     var word: String = ""
+    var letters: Array<String>
     
 }
 
-func createAllLetters(letters: [String]) -> [Letter] {
-    var all: [Letter] = []
-    for i in allLetters.indices {
-        all.append(Letter(id: i+1, value: allLetters[i]))
-    }
-    return all
-}
+
