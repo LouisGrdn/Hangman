@@ -15,28 +15,17 @@ struct AlphabetLetter: View {
         // Button clicked
         if(letter.isPressed)
         {
-            // Good guess
-            if(letter.isInWord){
-                Button(letter.value) {
-                }
-                .foregroundColor(.white)
-                .bold()
-                .frame(minWidth: 20)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(50)
+            Button(letter.value) {
             }
-            // Bad guess
-            else {
-                Button(letter.value) {
-                }
-                .foregroundColor(.white)
-                .bold()
-                .frame(minWidth: 20)
-                .padding()
-                .background(Color.red)
-                .cornerRadius(50)
-            }
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 45, height: 45)
+            .background(letter.isInWord ? .green : .red)
+            .cornerRadius(22.5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 75)
+                    .stroke(Color.white, lineWidth: 2)
+            )
         }
         else {
             Button(letter.value) {
@@ -45,11 +34,14 @@ struct AlphabetLetter: View {
 //                }
             }
             .foregroundColor(.white)
-            .bold()
-            .frame(minWidth: 20)
             .padding()
+            .frame(width: 45, height: 45)
             .background(Color.purple)
-            .cornerRadius(50)
+            .cornerRadius(22.5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 75)
+                    .stroke(Color.white, lineWidth: 2)
+            )
         }
     }
     
