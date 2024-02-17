@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Hangman: View {
+    @Binding var step: Int
     var body: some View {
         GeometryReader { geometry in
             Path { path in
@@ -18,13 +19,13 @@ struct Hangman: View {
                 path.move(to: CGPoint(x: width, y: height))
                 
                 HangmanParameters.gallows.forEach { segment in
-                    if(segment.line != nil) {
+                    if(segment.line != nil && segment.step < step) {
                         path.addLine(
                             to: CGPoint(
                                 x: width * segment.line!.x + xOffset,
                                 y: height * segment.line!.y))
                     }
-                    if(segment.curve != nil) {
+                    if(segment.curve != nil && segment.step < step) {
                         path.addQuadCurve(
                             to: CGPoint(
                                 x: width * segment.curve!.x + xOffset,
@@ -38,13 +39,13 @@ struct Hangman: View {
                     x: width * 0.50 + xOffset,
                     y: height * 0.30))
                 HangmanParameters.hangman.forEach { segment in
-                    if(segment.line != nil) {
+                    if(segment.line != nil && segment.step < step) {
                         path.addLine(
                             to: CGPoint(
                                 x: width * segment.line!.x + xOffset,
                                 y: height * segment.line!.y))
                     }
-                    if(segment.curve != nil) {
+                    if(segment.curve != nil && segment.step < step) {
                         path.addQuadCurve(
                             to: CGPoint(
                                 x: width * segment.curve!.x + xOffset,
@@ -55,12 +56,12 @@ struct Hangman: View {
                     }
                 }
             }
-            .stroke(Color.black, lineWidth: 2.5)
+            .stroke(Color.white, lineWidth: 2.5)
         }
 //        .background(Color.purple)
     }
 }
 
-#Preview {
-    Hangman()
-}
+//#Preview {
+//    Hangman(step: 3)
+//}
