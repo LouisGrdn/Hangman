@@ -16,7 +16,6 @@ var alphabet = ["A", "B", "C", "D", "E", "F",
 @Observable 
 class Game {
     init(word: String) {
-        self.won = false
         //Word to guess
         self.word = word
         // Letters in the word
@@ -43,8 +42,16 @@ class Game {
     var letters: Array<String>
     var step: Int
     var foundLetters: Array<String>
-    var won: Bool
     
+    func isWon() -> Bool {
+        for char in word {
+            if !foundLetters.contains(char.uppercased()) {
+                print(char)
+                return false
+            }
+        }
+        return true
+    }
 }
 
 

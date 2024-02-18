@@ -10,15 +10,15 @@ import SwiftUI
 struct GuessView: View {
     @Environment (Game.self) var game
     
-    func gameWon() {
-        for letter in game.word {
-            if !game.foundLetters.contains(letter.uppercased()) {
-                game.won = false
-                return
-            }
-        }
-        game.won = true
-    }
+//    func gameWon() {
+//        for letter in game.word {
+//            if !game.foundLetters.contains(letter.uppercased()) {
+//                game.won = false
+//                return
+//            }
+//        }
+//        game.won = true
+//    }
     
     var body: some View {
         var count: Int  = 0
@@ -43,13 +43,13 @@ struct GuessView: View {
                             .foregroundStyle(.white)
                     }
                     .onAppear() {
-                        gameWon()
+//                        gameWon()
                         count += 1
                     }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black)
+            .background(Color(red: 22/255, green: 22/255, blue: 59/255))
         }
     }
 }
