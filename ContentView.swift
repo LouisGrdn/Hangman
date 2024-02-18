@@ -8,12 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var game: Game = Game(word: "ABC")
+    @State private var game: Game = Game(word: "")
     @State private var word: String = ""
     var body: some View {
         let step = game.step
         let bindingStep = Binding(get: {step}, set: {newValue in game.step = newValue})
-        if game.word != ""  && game.step <= 10{
+        if game.step > 10 || game.isWon() && game.word != "" {
+            VStack {
+                Text(game.isWon() ? "Félicitations vous avez gagné" : "Dommage")
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                Text(game.isWon() ? "Le mot était bien \(game.word.uppercased())" : "Le mot était \(game.word.uppercased())")
+                    .font(.title3)
+                    .foregroundStyle(.white)
+                    .padding(.bottom, 20)
+                Button("Recommencer une partie") {
+                    game = Game(word: "")
+                    word = ""
+                }
+                .foregroundStyle(.white)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 22/255, green: 22/255, blue: 59/255))
+        }
+        else if game.word != ""  && game.step <= 10{
             VStack {
                 HStack {
                     Spacer()
@@ -33,25 +51,7 @@ struct ContentView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black)
-        }
-        else if game.step > 10 || game.won{
-            VStack {
-                Text(game.won ? "Félicitations vous avez gagné" : "Dommage")
-                    .font(.title2)
-                    .foregroundStyle(.white)
-                Text(game.won ? "Le mot était bien \(game.word.uppercased())" : "Le mot était \(game.word.uppercased())")
-                    .font(.title3)
-                    .foregroundStyle(.white)
-                    .padding(.bottom, 20)
-                Button("Recommencer une partie") {
-                    game = Game(word: "")
-                    word = ""
-                }
-                .foregroundStyle(.white)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black)
+            .background(Color(red: 22/255, green: 22/255, blue: 59/255))
         }
         else {
             VStack{
@@ -73,7 +73,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black)
+            .background(Color(red: 22/255, green: 22/255, blue: 59/255))
         }
     }
     
