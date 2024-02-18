@@ -29,14 +29,12 @@ struct AlphabetLetter: View {
         }
         else {
             Button(letter.value) {
-//                if(letter.isInWord) {
-                    updateLetter(&letter)
-//                }
+                updateLetter(&letter)
             }
             .foregroundColor(.white)
             .padding()
             .frame(width: 45, height: 45)
-            .background(Color.purple)
+            .background(Color(red: 123/255, green: 44/255, blue: 191/255))
             .cornerRadius(22.5)
             .overlay(
                 RoundedRectangle(cornerRadius: 75)

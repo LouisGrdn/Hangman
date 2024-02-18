@@ -10,7 +10,11 @@ import SwiftUI
 struct AlphabetList: View {
     @Environment (Game.self) var game
     
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
+//    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 8)
+    
+    private let columns = [
+        GridItem(.adaptive(minimum: 50))
+    ]
     
     
     func pressLetter(_ letter: inout Letter) {
@@ -23,14 +27,12 @@ struct AlphabetList: View {
     }
 
         var body: some View {
-            let index: Int = 0
             @Bindable var alphabet: Game = game
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach($alphabet.allLetters) { $letter in
-                    AlphabetLetter(letter: $letter, updateLetter: pressLetter)
+            LazyVGrid(columns: columns, alignment: .center) {
+                ForEach($alphabet.allLetters) { letter in
+                    AlphabetLetter(letter: letter, updateLetter: pressLetter)
                 }
             }
-            .padding()
         }
 }
 
