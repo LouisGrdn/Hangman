@@ -58,10 +58,11 @@ struct Hangman: View {
             }
             .stroke(Color.white, lineWidth: 2.5)
         }
-//        .background(Color.purple)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 22/255, green: 22/255, blue: 59/255))
     }
 }
 
-//#Preview {
-//    Hangman(step: 3)
-//}
+#Preview {
+    Hangman(step: .constant(10))
+}
